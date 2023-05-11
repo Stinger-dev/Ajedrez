@@ -10,7 +10,7 @@ public class Knight extends Piece {
 	@Override
 	void move(int x, int y) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

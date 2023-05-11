@@ -8,8 +8,7 @@ public class King extends Piece {
 
 	@Override
 	void move(int x, int y) {
-		
+		//ToDo
 	}
-
 
 }

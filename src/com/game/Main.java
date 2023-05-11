@@ -2,24 +2,26 @@ package com.game;
 
 import java.util.Scanner;
 
-import javax.swing.JLabel;
-
-import com.game.model.board.GraphicBoard;
+import com.game.model.board.GraphicBoardException;
 import com.game.model.board.TheHand;
-import com.game.model.pieces.Bishop;
-import com.game.model.pieces.Colour;
 
 public class Main {
-	private static final String		ORIGINAL_DISPLAY =  "R-0-0,KN-6-0,R-7-0,"+//mayusculas es negra, la primera es x y la segunda y
-			"P-0-1,P-1-1,P-7-1,"
-		   +"p-0-6,p-6-6,p-7-6,"
-		   +"r-0-7,kn-1-7";
+	public static final Scanner teclado = new Scanner(System.in);
+	private static final String NOTATION = "R-0-0,N-6-0,R-7-0,P-0-1,P-1-1,P-7-1,p-0-6,p-6-6,p-7-6,r-0-7,n-1-7";
+	// mayusculas es negra, la primera es x y la segunda y
+
 	public static void main(String[] args) {
-		TheHand ob1 = new TheHand();
+
+		TheHand ob1 = null;
+		try {
+			ob1 = new TheHand();
+			teclado.nextLine();
+			ob1.changeBoard(NOTATION);
+		} catch (GraphicBoardException e) {
+			e.printStackTrace();
+		}
 
 
-	
 
-		
 	}
 }

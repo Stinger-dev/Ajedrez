@@ -3,12 +3,12 @@ package com.game;
 import com.game.model.pieces.Piece;
 
 public class Cell {
-	
+/*
 	private int lowerX;
 	private int lowerY;
 	private int upperX;
 	private int upperY;
-	
+
 	private Piece piece;
 
 	public Cell(int lowerX, int lowerY, int upperX, int upperY, Piece piece) {
@@ -19,8 +19,5 @@ public class Cell {
 		this.upperY = upperY;
 		this.piece = piece;
 	}
-	
-	
-	
-
+*/
 }
