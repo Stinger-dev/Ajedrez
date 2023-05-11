@@ -11,43 +11,31 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
-import com.game.model.pieces.Bishop;
-import com.game.model.pieces.Colour;
-import com.game.model.pieces.King;
-import com.game.model.pieces.Knight;
-import com.game.model.pieces.Pawn;
 import com.game.model.pieces.Piece;
-import com.game.model.pieces.Queen;
-import com.game.model.pieces.Rook;
 
-public class GraphicBoard extends JFrame {
+
+
+public class GraphicBoard extends JFrame implements NotationToPieceArray{
 	//TODO: Externalizar las constantes
 	private static final int CELL_SIZE = 64;
 	public static final int CELL_NUMBER = 8;
 	public static final int MAX_SIZE = CELL_SIZE * CELL_NUMBER;
-	private static final Color WHITE_PIECE_COLOR = new Color(235, 235, 211);// Asi es mas facil hacer cambios esteticos en un futuro
+	private static final Color WHITE_PIECE_COLOR = new Color(235, 235, 211);// This way is easier to change colors in the future
 	private static final Color BLACK_PIECE_COLOR = new Color(116, 148, 84);
 	private static final boolean RESIZABLE = false;
 	private static final boolean UNDECORED = true;
 
 	//TODO: pasar todas las variables y la minima documentacion que hay a Ingles
-	// mayusculas es negra, la primera es x y la segunda y 
-	// r = rook, n = knight, b = bishop, q = queen, k = king, p = pawn
-	//TODO: pasar esto a un csv, que seguro que le gusta a Jose JAJAJAJAJ
-	private static final String ORIGINAL_DISPLAY = "R-0-0,N-1-0,B-2-0,Q-3-0,K-4-0,B-5-0,N-6-0,R-7-0,"+ 
-												   "P-0-1,P-1-1,P-2-1,P-3-1,P-4-1,P-5-1,P-6-1,P-7-1,"+ 
-												   "p-0-6,p-1-6,p-2-6,p-3-6,p-4-6,p-5-6,p-6-6,p-7-6,"+ 
-												   "r-0-7,n-1-7,b-2-7,q-3-7,k-4-7,b-5-7,n-6-7,r-7-7";
 
-	private static final String RUTA_IMAGENES = System.getProperty("user.dir") + "\\resources\\img\\";
 
-	private static JLayeredPane tablero = new JLayeredPane(); // Solo dios sabe lo que me ha costado encontrar esta cosa
-																// y hacerla funcionar, pero tambien lo que me soluciona
-																// la vida
 
-	public GraphicBoard(TheHand hand) throws GraphicBoardException {
+	private static final String IMG_PATH = System.getProperty("user.dir") + "\\resources\\img\\";
+
+	private static JLayeredPane board = new JLayeredPane();
+
+	public GraphicBoard(TheHand hand) throws BoardException {
 		settingsFrame();
-		generarTablero();
+		generateBoard();
 		generatePieces(ORIGINAL_DISPLAY);
 		this.addMouseListener(hand);
 		this.addMouseMotionListener(hand);
@@ -61,7 +49,7 @@ public class GraphicBoard extends JFrame {
 		this.setLocationRelativeTo(null); // Poniendolo en null hacemos que aparezca en el centro de la pantalla
 		this.setTitle("Ajedrez para nada hecho bajo crunch");// cambiamos el nombre de la ventana
 		try {
-			this.setIconImage(ImageIO.read(new File(RUTA_IMAGENES + "logo.jpg"))); // Asi le ponemos una imagen a la
+			this.setIconImage(ImageIO.read(new File(IMG_PATH + "logo.jpg"))); // Asi le ponemos una imagen a la
 																					// pestaña en la barra
 		} catch (IOException e) {
 			// Si no es capaz de encotrar el logo, tampoco pasa mucho, simplemente aparece
@@ -71,91 +59,65 @@ public class GraphicBoard extends JFrame {
 
 	}
 
-	private void generarTablero() {
-		tablero.setLayout(null);// Con esto evitamos que las etiqueta se vaya al centro
+	private void generateBoard() {
+		board.setLayout(null);// Con esto evitamos que las etiqueta se vaya al centro
 
-		boolean blanco = true;
+		boolean white = true;
 
 		for (int j = 0; j < CELL_NUMBER; j++) {
 			for (int i = 0; i < CELL_NUMBER; i++) {
-				tablero.add(generarCasilla(i, j, blanco), 0);
-				blanco = !blanco;
+				board.add(generateCell(i, j, white), 0);
+				white = !white;
 			}
-			blanco = !blanco;
+			white = !white;
 		}
-		this.setContentPane(tablero);
+		this.setContentPane(board);
 
 	}
 
-	private JLabel generarCasilla(int x, int y, boolean white) {
+	private JLabel generateCell(int x, int y, boolean white) {
 		/**
-		 * Generamos una casilla en la posicion determinada dada un color y las
-		 * coordenadas "ajedrecisticas"
+		 * Return a opaque JLabel with the defined color and position
 		 */
-		JLabel etiqueta = new JLabel(); // declaramos la etiqueta
-		etiqueta.setBounds(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE); // damos tamaño y posicion a la etiqueta
-		etiqueta.setOpaque(true); // Hacemos que la etiqueta sea solida
-		etiqueta.setBackground((white) ? WHITE_PIECE_COLOR : BLACK_PIECE_COLOR);
-		etiqueta.setVisible(true);
-		return etiqueta;
+		JLabel label = new JLabel(); // declaramos la etiqueta
+		label.setBounds(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE); // damos tamaño y posicion a la etiqueta
+		label.setOpaque(true); // Hacemos que la etiqueta sea solida
+		label.setBackground((white) ? WHITE_PIECE_COLOR : BLACK_PIECE_COLOR);
+		return label;
 	}
 
 	private static Image loadPicture(Piece c) {
 		/**
-		 * Analiza la pieza pasada por parametro y selecciona la imagen correspondiente
+		 * Returns the corresponging image to the piece
 		 * Para que funcione debe seguir el pormato COLOR\TYPE.png
+		 * The image path should use the format "COLOR\type.png"
 		 */
-		return new ImageIcon(RUTA_IMAGENES + c.getRutaImage()).getImage();
+		return new ImageIcon(IMG_PATH + c.getPieceImagePath()).getImage();
 	}
 
 	public void clearAllPieces() {
-		while (tablero.getComponentCount() > (CELL_NUMBER * CELL_NUMBER)) {
-			tablero.remove(0);
+		while (board.getComponentCount() > (CELL_NUMBER * CELL_NUMBER)) {
+			board.remove(0);
 		}
 		this.repaint(); //No termino de entender porque sin esto salen bugs, pero bueno, en todos lados pone que es importante y no lo haba 
 
 	}
 
-	public void generatePieces(String notation) throws GraphicBoardException {
+	public void generatePieces(String notation) throws BoardException  {
 		clearAllPieces();
-		for (String splitPieza : notation.split(",")) {
-			String[] splitDatos = splitPieza.split("-");
-			int x = Integer.parseInt(splitDatos[1]);
-			int y = Integer.parseInt(splitDatos[2]);
 
-			Colour color = (splitDatos[0].equals(splitDatos[0].toUpperCase())) ? Colour.BLACK : Colour.WHITE;
-			JLabel etiqueta = new JLabel();
-			Piece tmpPiece = null;
-			switch (splitDatos[0].toLowerCase()) {
-			case "b":
-				tmpPiece = new Bishop(x, y, color);
-				break;
-			case "k":
-				tmpPiece = new King(x, y, color);
-				break;
-			case "n":
-				tmpPiece = new Knight(x, y, color);
-				break;
-			case "p":
-				tmpPiece = new Pawn(x, y, color);
-				break;
-			case "q":
-				tmpPiece = new Queen(x, y, color);
-				break;
-			case "r":
-				tmpPiece = new Rook(x, y, color);
-				break;
-			default:
-				System.out.println(splitDatos[0]);
-				throw new GraphicBoardException("No se pudo crear una pieza");
+		Piece[][] tmpPieceArray = this.notationToPieceArray(notation, CELL_NUMBER);
+		
+		for(Piece[] tmpX : tmpPieceArray) {
+			for(Piece tmpY : tmpX) {
+				if(tmpY!= null) {	
+					JLabel etiqueta = new JLabel();
+					etiqueta.setIcon(new ImageIcon(loadPicture(tmpY).getScaledInstance(CELL_SIZE, CELL_SIZE, CELL_SIZE)));
+					etiqueta.setBounds(tmpY.getxPosition() * CELL_SIZE, tmpY.getyPosition() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+					board.add(etiqueta, 0);
+				}
 			}
-
-			etiqueta.setIcon(new ImageIcon(loadPicture(tmpPiece).getScaledInstance(CELL_SIZE, CELL_SIZE, CELL_SIZE)));
-			etiqueta.setBounds(tmpPiece.getxPosition() * CELL_SIZE, tmpPiece.getyPosition() * CELL_SIZE, CELL_SIZE,
-					CELL_SIZE);
-			tablero.add(etiqueta, 0);
-
-		}
+		}	
 		this.repaint();
 	}
 

@@ -30,7 +30,7 @@ public class TheHand implements MouseInputListener {
 	
 	
 	
-	public TheHand() throws GraphicBoardException {
+	public TheHand() throws BoardException {
 		logicBoard  = new LogicBoard();
 		graphicBoard = new GraphicBoard(this);
 	}
@@ -45,12 +45,13 @@ public class TheHand implements MouseInputListener {
 
 		if (e.getButton() == 1) {
 			//ToDo esto es solo una prueba de concepto para ver si funciona lo de repintar el tablero
-			try {
-				this.changeBoard(NOTATION);
-			} catch (GraphicBoardException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		
+				try {
+					this.changeBoard(NOTATION);
+				} catch (BoardException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		}
 	}
 
@@ -63,11 +64,15 @@ public class TheHand implements MouseInputListener {
 		}
 	}
 
-	public void changeBoard(String newBoard) throws GraphicBoardException {
+	public void changeBoard(String newBoard) throws BoardException  {
 		this.graphicBoard.generatePieces(newBoard);
 	}
 	public int toCoord(double num) {
 		return (int) (num / (GraphicBoard.MAX_SIZE / (double) GraphicBoard.CELL_NUMBER));
+	}
+	
+	public void resetBoard() throws BoardException {
+		this.graphicBoard.generatePieces(null);
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package com.game;
 
 import java.util.Scanner;
 
-import com.game.model.board.GraphicBoardException;
+import com.game.model.board.BoardException;
 import com.game.model.board.TheHand;
 
 public class Main {
@@ -16,8 +16,12 @@ public class Main {
 		try {
 			ob1 = new TheHand();
 			teclado.nextLine();
+			ob1.resetBoard();
+			teclado.nextLine();
 			ob1.changeBoard(NOTATION);
-		} catch (GraphicBoardException e) {
+			ob1.resetBoard();
+
+		} catch (BoardException e) {
 			e.printStackTrace();
 		}
 

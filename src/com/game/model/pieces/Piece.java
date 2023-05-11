@@ -32,7 +32,7 @@ public abstract class Piece {
 		return this.getClass().getSimpleName() + " x = " + this.xPosition + " y = " + this.yPosition;
 	}
 
-	public String getRutaImage() {
+	public String getPieceImagePath() {
 		return this.getColour() + "\\" + this.getClass().getSimpleName().toLowerCase() + ".png";
 	}
 }

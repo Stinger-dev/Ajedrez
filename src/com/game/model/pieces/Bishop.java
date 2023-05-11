@@ -12,7 +12,7 @@ public class Bishop extends Piece {
 		this.yPosition = y;
 	}
 
-	public boolean canMove(int x, int y) {
+	public boolean canMoveTo(int x, int y) {
 		/**
 		 * El el movimiento cumple la norma de |x1 - x2| = |y1 - y2| Tambien deben de
 		 * ser distintos a la posicion actual y ademas ser mayores que 0
