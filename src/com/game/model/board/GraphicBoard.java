@@ -48,6 +48,7 @@ public class GraphicBoard extends JFrame  {
 		generarTablero();
 		generatePieces(ORIGINAL_DISPLAY);
 		this.addMouseListener(hand);
+		this.addMouseMotionListener(hand);
 
 		
 		this.setVisible(true); //ES MUY IMPORTANTE QUE ESTE AL FINAL, SI NO SOLO SERA VISIBLE PARTE, ME PASE MEDIA H POR ESTA TONTERIA Y NI IDEA DE PQ PASA
