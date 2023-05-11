@@ -9,6 +9,12 @@ public class TheHand implements MouseInputListener {
 	 * TheHand es la clase encargada de gestionar las salidas de LogicBoard y
 	 * enviarlas a GraphicBoard, de ahi el nombre, es "la mano" del jugador que
 	 * relaciona el tablero, las piezas y el movimiento
+	 * 
+	 * En mi deseño la parte logica y la grfica estan completamente separadas, es decir, no tienen ninguna relacion entre ellas, asi puedo
+	 * modificar independientemente cada una de ellas y podria optimizarlas en un futuro
+	 * 
+	 * Se podria decir que he dividido esto entre front-end back-end y una api que es a la que tiene acceso el usuario y que gestiona 
+	 * las otras dos partes
 	 */
 	private static final String NOTATION = "R-0-0,N-6-0,R-7-0," + // mayusculas es negra, la primera es x y la segunda
 			// y

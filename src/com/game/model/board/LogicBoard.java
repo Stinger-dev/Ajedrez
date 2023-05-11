@@ -1,6 +1,14 @@
 package com.game.model.board;
 
+import com.game.model.pieces.Piece;
+
 public class LogicBoard {
-	//todo
+	private static Piece[][] board;
+	
+	
+	
+
+	
+	
 
 }

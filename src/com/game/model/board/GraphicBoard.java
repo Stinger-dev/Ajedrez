@@ -146,8 +146,8 @@ public class GraphicBoard extends JFrame {
 				tmpPiece = new Rook(x, y, color);
 				break;
 			default:
-				System.out.println(splitDatos[0].toLowerCase());
-				throw new GraphicBoardException("No se pudo cargar la imagen de una pieza");
+				System.out.println(splitDatos[0]);
+				throw new GraphicBoardException("No se pudo crear una pieza");
 			}
 
 			etiqueta.setIcon(new ImageIcon(loadPicture(tmpPiece).getScaledInstance(CELL_SIZE, CELL_SIZE, CELL_SIZE)));
@@ -157,7 +157,6 @@ public class GraphicBoard extends JFrame {
 
 		}
 		this.repaint();
-
 	}
 
 	public void close() {
