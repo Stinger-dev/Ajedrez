@@ -18,9 +18,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import com.game.model.Bishop;
-import com.game.model.Colour;
-import com.game.model.Piece;
+import com.game.model.pieces.Bishop;
+import com.game.model.pieces.Colour;
+import com.game.model.pieces.Piece;
 
 public class ChessMain {
 

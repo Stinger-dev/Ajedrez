@@ -1,4 +1,4 @@
-package com.game.model;
+package com.game.model.pieces;
 
 public abstract class Piece {
 
@@ -29,5 +29,7 @@ public abstract class Piece {
 	public String toString() {
 		return this.getClass().getSimpleName()+" x = "+ this.xPosition+ " y = "+this.yPosition;
 	}
-	
+	public String getRutaImage() {
+		return this.getColour()+"\\"+this.getClass().getSimpleName().toLowerCase()+".png";
+	}
 }

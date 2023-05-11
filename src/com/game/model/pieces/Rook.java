@@ -1,4 +1,4 @@
-package com.game.model;
+package com.game.model.pieces;
 
 public class Rook extends Piece{
 

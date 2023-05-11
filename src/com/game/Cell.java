@@ -1,6 +1,6 @@
 package com.game;
 
-import com.game.model.Piece;
+import com.game.model.pieces.Piece;
 
 public class Cell {
 	

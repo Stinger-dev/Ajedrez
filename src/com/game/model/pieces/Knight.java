@@ -1,8 +1,8 @@
-package com.game.model;
+package com.game.model.pieces;
 
-public class Pawn extends Piece{
+public class Knight extends Piece {
 
-	public Pawn(int x, int y, Colour c) {
+	public Knight(int x, int y, Colour c) {
 		super(x, y, c);
 		// TODO Auto-generated constructor stub
 	}
@@ -12,6 +12,5 @@ public class Pawn extends Piece{
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }
