@@ -34,6 +34,17 @@ public class TheHand implements MouseInputListener {
 		logicBoard  = new LogicBoard();
 		graphicBoard = new GraphicBoard(this);
 	}
+	
+	public void changeBoard(String newBoard) throws BoardException  {
+		this.graphicBoard.generatePieces(newBoard);
+	}
+	public int toCoord(double num) {
+		return (int) (num / (GraphicBoard.MAX_SIZE / (double) GraphicBoard.CELL_NUMBER));
+	}
+	
+	public void resetBoard() throws BoardException {
+		this.graphicBoard.generatePieces(null);
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -45,14 +56,16 @@ public class TheHand implements MouseInputListener {
 
 		if (e.getButton() == 1) {
 			//ToDo esto es solo una prueba de concepto para ver si funciona lo de repintar el tablero
-		
-				try {
-					this.changeBoard(NOTATION);
-				} catch (BoardException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			try {
+				this.changeBoard(NOTATION);
+			} catch (BoardException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
+		
+		
+		System.out.println(e.getButton());
 	}
 
 	@Override
@@ -61,18 +74,9 @@ public class TheHand implements MouseInputListener {
 			// Asi calculo la distancia respecto a la pantalla del punto 00 del frame y
 			// puedo desplazarlo consecuentemente
 			graphicBoard.setLocation(e.getXOnScreen() - dragClick.getX(), e.getYOnScreen() - dragClick.getY());
-		}
-	}
-
-	public void changeBoard(String newBoard) throws BoardException  {
-		this.graphicBoard.generatePieces(newBoard);
-	}
-	public int toCoord(double num) {
-		return (int) (num / (GraphicBoard.MAX_SIZE / (double) GraphicBoard.CELL_NUMBER));
-	}
-	
-	public void resetBoard() throws BoardException {
-		this.graphicBoard.generatePieces(null);
+			graphicBoard.setSize(GraphicBoard.MAX_SIZE, GraphicBoard.MAX_SIZE);
+			 //Con esto añado soporte a cambio de pantallas
+			}
 	}
 
 	@Override

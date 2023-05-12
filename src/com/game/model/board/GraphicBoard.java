@@ -1,6 +1,7 @@
 package com.game.model.board;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -123,6 +124,12 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 
 	public void close() {
 		this.dispose();
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		// TODO Auto-generated method stub
+		super.paint(g);
 	}
 
 }

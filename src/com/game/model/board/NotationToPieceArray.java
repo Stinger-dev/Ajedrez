@@ -22,9 +22,12 @@ public interface NotationToPieceArray {
 		/**
 		 * null in both will return the default notation (normal chess) at the default size(8)
 		 */
-		if(notation == null && cellsNumber == null) {
+		if(notation == null) {
 			notation = ORIGINAL_DISPLAY;
+		}
+		if(cellsNumber == null) {
 			cellsNumber = DEFAULT_CELLS_NUMBER;
+
 		}
 		
 		
