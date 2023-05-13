@@ -8,7 +8,8 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	void move(int x, int y) {
+	boolean move(int x, int y, Piece[][] board) {
+		return false;
 		// TODO Auto-generated method stub
 
 	}

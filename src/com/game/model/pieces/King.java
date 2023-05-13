@@ -7,7 +7,8 @@ public class King extends Piece {
 	}
 
 	@Override
-	void move(int x, int y) {
+	boolean move(int x, int y, Piece[][] board) {
+		return false;
 		//ToDo
 	}
 

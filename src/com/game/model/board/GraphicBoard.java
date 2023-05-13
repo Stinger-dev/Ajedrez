@@ -126,10 +126,5 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 		this.dispose();
 	}
 	
-	@Override
-	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
-		super.paint(g);
-	}
 
 }

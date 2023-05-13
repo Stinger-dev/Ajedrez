@@ -16,11 +16,9 @@ public class TheHand implements MouseInputListener {
 	 * Se podria decir que he dividido esto entre front-end back-end y una api que es a la que tiene acceso el usuario y que gestiona 
 	 * las otras dos partes
 	 */
-	private static final String NOTATION = "R-0-0,N-6-0,R-7-0," + // mayusculas es negra, la primera es x y la segunda
-			// y
-			"P-0-1,P-1-1,P-7-1," + "p-0-6,p-6-6,p-7-6," + "r-0-7,n-1-7";
+
 	
-	private LogicBoard logicBoard; //TODO
+	private LogicBoard logicBoard; 
 	private GraphicBoard graphicBoard ;
 
 	// Asi puedo controlar que solo sea el click derecho el que permita arrastrar,
@@ -28,22 +26,31 @@ public class TheHand implements MouseInputListener {
 	// muy bien porque
 	private MouseEvent dragClick;
 	
+	private MouseEvent firstClick;
+
+	
 	
 	
 	public TheHand() throws BoardException {
 		logicBoard  = new LogicBoard();
 		graphicBoard = new GraphicBoard(this);
+		this.logicBoard.obtainNotation();
 	}
 	
 	public void changeBoard(String newBoard) throws BoardException  {
 		this.graphicBoard.generatePieces(newBoard);
 	}
-	public int toCoord(double num) {
+	
+	public int toCoord(int num) {
 		return (int) (num / (GraphicBoard.MAX_SIZE / (double) GraphicBoard.CELL_NUMBER));
 	}
 	
 	public void resetBoard() throws BoardException {
+		/**
+		 * Reset the current board to a standard board
+		 */
 		this.graphicBoard.generatePieces(null);
+		this.logicBoard = new LogicBoard();
 	}
 
 	@Override
@@ -53,28 +60,26 @@ public class TheHand implements MouseInputListener {
 		} else {
 			dragClick = null;
 		}
-
+		
 		if (e.getButton() == 1) {
-			//ToDo esto es solo una prueba de concepto para ver si funciona lo de repintar el tablero
-			try {
-				this.changeBoard(NOTATION);
-			} catch (BoardException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			firstClick = e;
+		} else {
+			firstClick = null;
 		}
-		
-		
-		System.out.println(e.getButton());
+
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (dragClick != null) {
+			/*
+			 * Siempre da 0 cuando hay un drag, asi que es mejor hacerlo asi si quiero que la unica forma de que se mueva sea con el click derecho 
+			 */
+
 			// Asi calculo la distancia respecto a la pantalla del punto 00 del frame y
 			// puedo desplazarlo consecuentemente
 			graphicBoard.setLocation(e.getXOnScreen() - dragClick.getX(), e.getYOnScreen() - dragClick.getY());
-			graphicBoard.setSize(GraphicBoard.MAX_SIZE, GraphicBoard.MAX_SIZE);
+			graphicBoard.setSize(GraphicBoard.MAX_SIZE, GraphicBoard.MAX_SIZE);	
 			 //Con esto añado soporte a cambio de pantallas
 			}
 	}
@@ -88,7 +93,30 @@ public class TheHand implements MouseInputListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// No es necesario para este programa
+		if (e.getButton() == 3) {
+			//Con esto soluciono un bug que al mover el juego entre diferentes pantallas cambiaba de tamaño
+			graphicBoard.setSize(GraphicBoard.MAX_SIZE, GraphicBoard.MAX_SIZE);	
+			
+			
+			//Esto soluciona un bug en el que si click izq y luego click derecho, aunque soltaras el izq, podias mover el tablero con el derecho
+			//Pasaba porque la orden de poner drag a null solo pasaba si se pulsaba algo nuevo, al ponerlo tambien al soltar evito que sea activado con otro
+			dragClick = null; 
+			
+
+		}
+		if (e.getButton() == 1 && firstClick != null) {
+			System.out.println(e.getPoint().toString());
+			System.out.println(firstClick.getPoint().toString());
+
+			try {
+				String tmp = this.logicBoard.moveCoordToCoord(toCoord(this.firstClick.getX()), toCoord(this.firstClick.getY()),
+						toCoord(e.getX()), toCoord(e.getY()));				
+				this.graphicBoard.generatePieces(tmp);
+			} catch (BoardException e1) {
+				e1.printStackTrace();
+			}
+
+		}
 	}
 
 	@Override

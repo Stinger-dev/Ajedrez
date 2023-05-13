@@ -5,6 +5,8 @@ public abstract class Piece {
 	protected int xPosition;
 	protected int yPosition;
 	protected Colour colour;
+	
+
 
 	protected Piece(int x, int y, Colour c) {
 		super();
@@ -13,7 +15,7 @@ public abstract class Piece {
 		this.colour = c;
 	}
 
-	abstract void move(int x, int y);
+	public abstract boolean move(int x, int y , Piece[][] board);
 
 	public Colour getColour() {
 		return colour;
@@ -29,10 +31,27 @@ public abstract class Piece {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " x = " + this.xPosition + " y = " + this.yPosition;
+		String pieceType = 	this.getClass().getSimpleName().substring(0, 2).toLowerCase();
+		
+		if(this.colour.equals(Colour.BLACK)) {
+			pieceType = pieceType.toUpperCase();
+		}
+		
+		return pieceType+ "-" + this.xPosition + "-" + this.yPosition;
+		
 	}
 
 	public String getPieceImagePath() {
 		return this.getColour() + "\\" + this.getClass().getSimpleName().toLowerCase() + ".png";
 	}
+
+	public void setxPosition(int xPosition) {
+		this.xPosition = xPosition;
+	}
+
+	public void setyPosition(int yPosition) {
+		this.yPosition = yPosition;
+	}
+	
+	
 }
