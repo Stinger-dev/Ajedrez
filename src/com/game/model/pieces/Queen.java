@@ -1,16 +1,14 @@
 package com.game.model.pieces;
 
-public class Queen extends Piece {
+public class Queen extends Piece implements LinealMove, DiagonalMove{
 
-	public Queen(int x, int y, Colour c) {
+	public Queen(int x, int y, Colour c)  {
 		super(x, y, c);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean canMoveTo(int x2, int y2, Piece[][] board) {
-		// TODO Auto-generated method stub
-		return false;
+		return canDiagonalMove(this.xPosition, this.yPosition, x2, y2, board) || canLinealMove(this.xPosition, this.yPosition, x2, y2, board);
 	}
 
 
