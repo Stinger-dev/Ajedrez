@@ -20,7 +20,12 @@ public interface NotationToPieceArray {
 	*/
 	
 	
-	public static final String ORIGINAL_DISPLAY =	"PA-3-3,BI-4-4";
+	//public static final String ORIGINAL_DISPLAY =	"RO-3-3,BI-4-4";
+	
+	public static final String ORIGINAL_DISPLAY =  "RO-0-0,KN-1-0,BI-2-0,QU-3-0,KI-4-0,BI-5-0,KN-6-0,RO-7-0,"+ 
+													"ro-0-7,kn-1-7,bi-2-7,qu-3-7,ki-4-7,bi-5-7,kn-6-7,ro-7-7";
+
+
 	public static final Integer DEFAULT_CELLS_NUMBER = GraphicBoard.CELL_NUMBER;
 
 	public default Piece[][] notationToPieceArray(String notation, Integer cellsNumber) throws BoardException {
@@ -28,7 +33,7 @@ public interface NotationToPieceArray {
 		 * null in both will return the default notation (normal chess) at the default size(8)
 		 */
 		if(notation == null) {
-			notation = ORIGINAL_DISPLAY;
+			notation = ORIGINAL_DISPLAY; 
 		}
 		if(cellsNumber == null) {
 			cellsNumber = DEFAULT_CELLS_NUMBER;

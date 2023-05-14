@@ -8,10 +8,11 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	boolean move(int x, int y, Piece[][] board) {
-		return false;
+	public boolean canMoveTo(int x2, int y2, Piece[][] board) {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
+
+
 
 }

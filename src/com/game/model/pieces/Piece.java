@@ -1,5 +1,6 @@
 package com.game.model.pieces;
 
+
 public abstract class Piece {
 
 	protected int xPosition;
@@ -15,8 +16,18 @@ public abstract class Piece {
 		this.colour = c;
 	}
 
-	public abstract boolean move(int x, int y , Piece[][] board);
-
+	public boolean move(int x2, int y2, Piece[][] board) {
+		boolean output = false;
+		if(this.canMoveTo(x2, y2, board) ) {
+			this.xPosition = x2;
+			this.yPosition = y2;
+			output = true;
+		}
+		return output;
+	}
+	
+	public abstract boolean canMoveTo(int x2, int y2, Piece[][] board );
+	
 	public Colour getColour() {
 		return colour;
 	}
@@ -52,6 +63,8 @@ public abstract class Piece {
 	public void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
 	}
+	
+	
 	
 	
 }

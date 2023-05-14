@@ -6,10 +6,11 @@ public class King extends Piece {
 		super(x, y, c);
 	}
 
-	@Override
-	boolean move(int x, int y, Piece[][] board) {
-		return false;
-		//ToDo
-	}
+	@Override	
+	public boolean canMoveTo(int x2, int y2, Piece[][] board ) {
 
+		boolean output = false;
+
+		return output;
+	}
 }

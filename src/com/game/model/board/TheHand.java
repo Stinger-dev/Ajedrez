@@ -105,8 +105,7 @@ public class TheHand implements MouseInputListener {
 
 		}
 		if (e.getButton() == 1 && firstClick != null) {
-			System.out.println(e.getPoint().toString());
-			System.out.println(firstClick.getPoint().toString());
+
 
 			try {
 				String tmp = this.logicBoard.moveCoordToCoord(toCoord(this.firstClick.getX()), toCoord(this.firstClick.getY()),
