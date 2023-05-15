@@ -104,6 +104,7 @@ public class TheHand implements MouseInputListener {
 			
 
 		}
+		
 		if (e.getButton() == 1 && firstClick != null) {
 
 

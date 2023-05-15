@@ -4,7 +4,7 @@ public interface LinealMove {
 		
 	public default boolean canLinealMove(int x1, int y1,int x2, int y2, Piece[][] board) {
 		boolean output = false;
-		if ((x1 - x2 == 0) || (y1-y2 == 0)) {
+		if ((x1 - x2 == 0) || (y1 - y2 == 0)) {
 	
 			int addX = 1;
 			if(x1 - x2 == 0) {
@@ -14,7 +14,7 @@ public interface LinealMove {
 			}
 			
 			int addY = 1;
-			if(y1-y2 == 0) {
+			if(y1 - y2 == 0) {
 				addY = 0;
 			}else if (y1 > y2) {
 				addY = -1;

@@ -8,8 +8,7 @@ public interface DiagonalMove {
 		 * ser distintos a la posicion actual y ademas ser mayores que 0
 		 */
 		boolean output = false;
-		if (y1 != y2 && x1 != x2 && (Math.abs(x1 - y1) == Math.abs(x2 - y2)
-				|| Math.abs(x1 - x2) == Math.abs(y1 - y2) )) {
+		if (Math.abs(x1 - y1) == Math.abs(x2 - y2)|| Math.abs(x1 - x2) == Math.abs(y1 - y2) ) {
 			int addX = (x1 > x2)? -1 : 1;
 			int addY = (y1 > y2)? -1 : 1;
 			boolean colision = false;
