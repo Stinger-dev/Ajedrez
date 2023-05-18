@@ -28,7 +28,6 @@ public interface LinealMove {
 				}
 			}
 			output = !colision;
-
 		}
 		return output;
 	}

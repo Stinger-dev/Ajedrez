@@ -1,11 +1,13 @@
 package com.game.model.board;
 
 
+import com.game.model.pieces.Colour;
 import com.game.model.pieces.Piece;
 
 public class LogicBoard implements NotationToPieceArray{
 	
-	private  Piece[][] board ;
+	private  Piece[][] board;
+	private Colour nextMove = Colour.WHITE;
 	
 	
 	public LogicBoard(String notaion, Integer cellNumber) throws BoardException {
@@ -25,12 +27,20 @@ public class LogicBoard implements NotationToPieceArray{
 	
 	public String moveCoordToCoord(int x1, int y1, int x2, int y2) {
 		
-		if(x2>=0 && y2>=0 && x2<GraphicBoard.CELL_NUMBER && y2<GraphicBoard.CELL_NUMBER && this.board[x1][y1] != null && this.board[x2][y2] == null 
+		
+		if(x2>=0 && y2>=0 && x2<GraphicBoard.CELL_NUMBER && y2<GraphicBoard.CELL_NUMBER && this.board[x1][y1] != null 
+				&& (this.board[x2][y2] == null || !this.board[x2][y2].getColour().equals(this.board[x1][y1].getColour()))
+				&& (this.board[x1][y1].getColour().equals(this.nextMove))
 				&& (this.board[x1][y1].move(x2, y2, board))) {
 			
-				this.board[x2][y2] = this.board[x1][y1];	
-				this.board[x1][y1] = null;		
+		
+			
+			this.board[x2][y2] = null;
+			this.board[x2][y2] = this.board[x1][y1];
+			this.board[x1][y1] = null;
+			this.nextMove = (this.nextMove.equals(Colour.WHITE))? Colour.BLACK : Colour.WHITE; //Una vez el movimiento ser ha hecho, se cambia quien juega despues
 		}
+		
 		return this.obtainNotation();
 	}
 	

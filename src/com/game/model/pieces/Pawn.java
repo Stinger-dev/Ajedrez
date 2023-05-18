@@ -13,7 +13,7 @@ public class Pawn extends Piece {
 		if(this.xPosition == x2) {
 			if(this.colour == Colour.BLACK ) {
 				int totalMove = y2 - this.yPosition;
-				if(totalMove == 1 || (totalMove == 2 && this.yPosition == 1)) {
+				if(totalMove == 1 || (totalMove == 2 && this.yPosition == 1 && board[this.xPosition][this.yPosition+1] == null)) {
 					output = true;
 				}
 				
@@ -24,6 +24,7 @@ public class Pawn extends Piece {
 				}
 			}
 		}
+		
 		return output;
 	}
 }

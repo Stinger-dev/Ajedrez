@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
+import com.game.model.pieces.Colour;
 import com.game.model.pieces.Piece;
 
 
@@ -123,6 +124,21 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 
 	public void close() {
 		this.dispose();
+	}
+	
+	public void endMatch(Colour gandor) {
+		while (board.getComponentCount() > 0) {
+			board.remove(0);
+		}
+		this.repaint(); 
+		
+		JLabel label = new JLabel(); 
+		label.setBounds(0, 0, MAX_SIZE, MAX_SIZE); 
+		label.setOpaque(true); 
+		label.setBackground((gandor.equals(Colour.WHITE)) ? WHITE_PIECE_COLOR : BLACK_PIECE_COLOR);
+		this.add(label);
+		
+		
 	}
 	
 

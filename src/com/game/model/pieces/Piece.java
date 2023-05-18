@@ -17,8 +17,8 @@ public abstract class Piece {
 	}
 
 	public boolean move(int x2, int y2, Piece[][] board) {
-		/*	Return true and change values if the move can be done
-		 * 
+		/*	
+		 * Return true and change values if the move can be done
 		 */
 		boolean output = false;
 		if((this.yPosition!=y2 || this.xPosition!=x2) && this.canMoveTo(x2, y2, board) ) {
@@ -65,9 +65,5 @@ public abstract class Piece {
 
 	public void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
-	}
-	
-	
-	
-	
+	}	
 }

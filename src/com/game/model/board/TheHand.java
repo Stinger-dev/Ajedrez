@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
+import com.game.model.pieces.Colour;
+
 public class TheHand implements MouseInputListener {
 	/**
 	 * TheHand es la clase encargada de gestionar las salidas de LogicBoard y
@@ -110,8 +112,17 @@ public class TheHand implements MouseInputListener {
 
 			try {
 				String tmp = this.logicBoard.moveCoordToCoord(toCoord(this.firstClick.getX()), toCoord(this.firstClick.getY()),
-						toCoord(e.getX()), toCoord(e.getY()));				
-				this.graphicBoard.generatePieces(tmp);
+						toCoord(e.getX()), toCoord(e.getY()));	
+				
+				if(!tmp.contains("KI")) {
+					this.graphicBoard.endMatch(Colour.WHITE);
+				}else if(!tmp.contains("ki")) {
+					this.graphicBoard.endMatch(Colour.BLACK);
+
+				}else {
+					this.graphicBoard.generatePieces(tmp);					
+				}
+
 			} catch (BoardException e1) {
 				e1.printStackTrace();
 			}
