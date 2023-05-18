@@ -15,8 +15,8 @@ import com.game.model.pieces.Colour;
 import com.game.model.pieces.Piece;
 
 
-
 public class GraphicBoard extends JFrame implements NotationToPieceArray{
+	private static final long serialVersionUID = 1L;
 	//TODO: Externalizar las constantes
 	private static final int CELL_SIZE = 64;
 	public static final int CELL_NUMBER = 8;
@@ -26,7 +26,6 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 	private static final boolean RESIZABLE = false;
 	private static final boolean UNDECORED = true;
 
-	//TODO: pasar todas las variables y la minima documentacion que hay a Ingles
 
 
 
@@ -76,10 +75,10 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 
 	}
 
+	/**
+	 * Return a opaque JLabel with the defined color and position
+	 */
 	private JLabel generateCell(int x, int y, boolean white) {
-		/**
-		 * Return a opaque JLabel with the defined color and position
-		 */
 		JLabel label = new JLabel(); // declaramos la etiqueta
 		label.setBounds(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE); // damos tamaño y posicion a la etiqueta
 		label.setOpaque(true); // Hacemos que la etiqueta sea solida
@@ -87,12 +86,12 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 		return label;
 	}
 
+	/**
+	 * Returns the corresponging image to the piece
+	 * Para que funcione debe seguir el pormato COLOR\TYPE.png
+	 * The image path should use the format "COLOR\type.png"
+	 */
 	private static Image loadPicture(Piece c) {
-		/**
-		 * Returns the corresponging image to the piece
-		 * Para que funcione debe seguir el pormato COLOR\TYPE.png
-		 * The image path should use the format "COLOR\type.png"
-		 */
 		return new ImageIcon(IMG_PATH + c.getPieceImagePath()).getImage();
 	}
 

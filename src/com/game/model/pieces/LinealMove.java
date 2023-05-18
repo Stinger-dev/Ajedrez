@@ -7,14 +7,14 @@ public interface LinealMove {
 		if ((x1 - x2 == 0) || (y1 - y2 == 0)) {
 	
 			int addX = 1;
-			if(x1 - x2 == 0) {
+			if(x1 == x2  ) {
 				addX = 0;
 			}else if (x1 > x2) {
 				addX = -1;
 			}
 			
 			int addY = 1;
-			if(y1 - y2 == 0) {
+			if(y1 == y2) {
 				addY = 0;
 			}else if (y1 > y2) {
 				addY = -1;

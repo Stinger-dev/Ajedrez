@@ -7,7 +7,7 @@ public abstract class Piece {
 	protected int yPosition;
 	protected Colour colour;
 	
-
+	
 
 	protected Piece(int x, int y, Colour c) {
 		super();
@@ -66,4 +66,5 @@ public abstract class Piece {
 	public void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
 	}	
+
 }

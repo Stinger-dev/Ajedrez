@@ -2,11 +2,11 @@ package com.game.model.pieces;
 
 public interface DiagonalMove {
 
+	/**
+	 * El el movimiento cumple la norma de |x1 - x2| = |y1 - y2| o |x1 - y1| = |x2 - y2|Tambien deben de
+	 * ser distintos a la posicion actual y ademas ser mayores que 0
+	 */
 	public default boolean canDiagonalMove(int x1, int y1,int x2, int y2, Piece[][] board) {
-		/**
-		 * El el movimiento cumple la norma de |x1 - x2| = |y1 - y2| o |x1 - y1| = |x2 - y2|Tambien deben de
-		 * ser distintos a la posicion actual y ademas ser mayores que 0
-		 */
 		boolean output = false;
 		if (Math.abs(x1 - y1) == Math.abs(x2 - y2)|| Math.abs(x1 - x2) == Math.abs(y1 - y2) ) {
 			int addX = (x1 > x2)? -1 : 1;

@@ -23,10 +23,10 @@ public interface NotationToPieceArray {
 
 	public static final Integer DEFAULT_CELLS_NUMBER = GraphicBoard.CELL_NUMBER;
 
+	/**
+	 * null in both will return the default notation (normal chess) at the default size(8)
+	 */
 	public default Piece[][] notationToPieceArray(String notation, Integer cellsNumber) throws BoardException {
-		/**
-		 * null in both will return the default notation (normal chess) at the default size(8)
-		 */
 		if(notation == null) {
 			notation = ORIGINAL_DISPLAY; 
 		}

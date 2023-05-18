@@ -6,18 +6,22 @@ import javax.swing.event.MouseInputListener;
 
 import com.game.model.pieces.Colour;
 
+/**
+ * TheHand es la clase encargada de gestionar las salidas de LogicBoard y
+ * enviarlas a GraphicBoard, de ahi el nombre, es "la mano" del jugador que
+ * relaciona el tablero, las piezas y el movimiento
+ * 
+ * En mi deseño la parte logica y la grfica estan completamente separadas, es decir, no tienen ninguna relacion entre ellas, asi puedo
+ * modificar independientemente cada una de ellas y podria optimizarlas en un futuro
+ * 
+ * Se podria decir que he dividido esto entre front-end back-end y una api que es a la que tiene acceso el usuario y que gestiona 
+ * las otras dos partes
+ */
 public class TheHand implements MouseInputListener {
-	/**
-	 * TheHand es la clase encargada de gestionar las salidas de LogicBoard y
-	 * enviarlas a GraphicBoard, de ahi el nombre, es "la mano" del jugador que
-	 * relaciona el tablero, las piezas y el movimiento
-	 * 
-	 * En mi deseño la parte logica y la grfica estan completamente separadas, es decir, no tienen ninguna relacion entre ellas, asi puedo
-	 * modificar independientemente cada una de ellas y podria optimizarlas en un futuro
-	 * 
-	 * Se podria decir que he dividido esto entre front-end back-end y una api que es a la que tiene acceso el usuario y que gestiona 
-	 * las otras dos partes
-	 */
+	//TODO: ENROQUE
+	//TODO: MEJORAR MOVIMIENTO PEON
+	//TODO: pasar todas las variables y la minima documentacion que hay a Ingles
+	//TODO: Coronar
 
 	
 	private LogicBoard logicBoard; 
@@ -47,10 +51,10 @@ public class TheHand implements MouseInputListener {
 		return (int) (num / (GraphicBoard.MAX_SIZE / (double) GraphicBoard.CELL_NUMBER));
 	}
 	
+	/**
+	 * Reset the current board to a standard board
+	 */
 	public void resetBoard() throws BoardException {
-		/**
-		 * Reset the current board to a standard board
-		 */
 		this.graphicBoard.generatePieces(null);
 		this.logicBoard = new LogicBoard();
 	}
@@ -68,6 +72,7 @@ public class TheHand implements MouseInputListener {
 		} else {
 			firstClick = null;
 		}
+	
 
 	}
 
@@ -114,7 +119,7 @@ public class TheHand implements MouseInputListener {
 				String tmp = this.logicBoard.moveCoordToCoord(toCoord(this.firstClick.getX()), toCoord(this.firstClick.getY()),
 						toCoord(e.getX()), toCoord(e.getY()));	
 				
-				if(!tmp.contains("KI")) {
+				if(!tmp.contains("KI")) { //Si no tiene el rey significa que ha perdido
 					this.graphicBoard.endMatch(Colour.WHITE);
 				}else if(!tmp.contains("ki")) {
 					this.graphicBoard.endMatch(Colour.BLACK);
