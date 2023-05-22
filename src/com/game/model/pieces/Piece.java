@@ -65,6 +65,10 @@ public abstract class Piece {
 
 	public void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
-	}	
+	}
+	
+	public Piece clone() {
+		return this;
+	}
 
 }

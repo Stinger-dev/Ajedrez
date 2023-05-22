@@ -28,6 +28,19 @@ public class Rook extends Piece implements LinealMove{
 	}
 	
 	
+	public void castling() {
+		if(this.xPosition == 0 && !moved) {
+			this.xPosition = 3;
+			moved = true;
+		}else if(this.xPosition == 7 && !moved){
+			this.xPosition = 5;
+			moved = true;
+
+		}
+
+	}
+	
+	
 
 
 }

@@ -7,6 +7,24 @@ public class King extends Piece implements LinealMove, DiagonalMove{
 		super(x, y, c);
 		this.moved = false;
 	}
+	@Override
+	public boolean move(int x2, int y2, Piece[][] board) {
+		/*	
+		 * Return true and change values if the move can be done
+		 */
+		boolean output = false;
+		if((this.yPosition!=y2 || this.xPosition!=x2) && (this.canMoveTo(x2, y2, board) || canCastling(x2, y2, board))) {
+			if(!canCastling(x2, y2, board)) {
+			this.xPosition = x2;
+			this.yPosition = y2;
+			}else {
+				this.xPosition = this.xPosition +( (x2 == 0 )? -2 : 2 );
+			}
+			output = true;
+		}
+		return output;
+	}
+	
 
 	@Override	
 	public boolean canMoveTo(int x2, int y2, Piece[][] board ) {
@@ -21,7 +39,7 @@ public class King extends Piece implements LinealMove, DiagonalMove{
 	
 	public boolean canCastling(int x2, int y2, Piece[][] board ) {
 		boolean output = false;
-		if(!((Rook)board[x2][y2]).isMoved() && !this.isMoved()) {
+		if(board[x2][y2] != null &&!((Rook)board[x2][y2]).isMoved() && !this.isMoved() ) {
 			int addX = 1;
 			if(this.xPosition == x2) {
 				addX = 0;
@@ -35,12 +53,9 @@ public class King extends Piece implements LinealMove, DiagonalMove{
 					colision = true;
 				}
 			}
-			output = !colision;
-			
-			
+			output = !colision;			
 		}
-		
-		
+
 		return output;
 	}
 	

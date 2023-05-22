@@ -1,6 +1,5 @@
 package com.game.model.board;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -17,14 +16,7 @@ import com.game.model.pieces.Piece;
 
 public class GraphicBoard extends JFrame implements NotationToPieceArray{
 	private static final long serialVersionUID = 1L;
-	//TODO: Externalizar las constantes
-	private static final int CELL_SIZE = 64;
-	public static final int CELL_NUMBER = 8;
-	public static final int MAX_SIZE = CELL_SIZE * CELL_NUMBER;
-	private static final Color WHITE_PIECE_COLOR = new Color(235, 235, 211);// This way is easier to change colors in the future
-	private static final Color BLACK_PIECE_COLOR = new Color(116, 148, 84);
-	private static final boolean RESIZABLE = false;
-	private static final boolean UNDECORED = true;
+
 
 
 
@@ -36,16 +28,16 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 	public GraphicBoard(TheHand hand) throws BoardException {
 		settingsFrame();
 		generateBoard();
-		generatePieces(ORIGINAL_DISPLAY);
+		generatePieces(Constantes.ORIGINAL_DISPLAY);
 		this.addMouseListener(hand);
 		this.addMouseMotionListener(hand);
 		this.setVisible(true); // ES MUY IMPORTANTE QUE ESTE AL FINAL, SI NO SOLO SERA VISIBLE PARTE, ME PASE MEDIA H POR ESTA TONTERIA Y NI IDEA DE PQ PASA
 	}
 
 	private void settingsFrame() {
-		this.setSize(MAX_SIZE, MAX_SIZE);
-		this.setResizable(RESIZABLE);
-		this.setUndecorated(UNDECORED);
+		this.setSize(Constantes.MAX_SIZE, Constantes.MAX_SIZE);
+		this.setResizable(Constantes.RESIZABLE);
+		this.setUndecorated(Constantes.UNDECORED);
 		this.setLocationRelativeTo(null); // Poniendolo en null hacemos que aparezca en el centro de la pantalla
 		this.setTitle("Ajedrez para nada hecho bajo crunch");// cambiamos el nombre de la ventana
 		try {
@@ -64,8 +56,8 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 
 		boolean white = true;
 
-		for (int j = 0; j < CELL_NUMBER; j++) {
-			for (int i = 0; i < CELL_NUMBER; i++) {
+		for (int j = 0; j < Constantes.CELL_NUMBER; j++) {
+			for (int i = 0; i < Constantes.CELL_NUMBER; i++) {
 				board.add(generateCell(i, j, white), 0);
 				white = !white;
 			}
@@ -80,9 +72,9 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 	 */
 	private JLabel generateCell(int x, int y, boolean white) {
 		JLabel label = new JLabel(); // declaramos la etiqueta
-		label.setBounds(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE); // damos tamaño y posicion a la etiqueta
+		label.setBounds(x * Constantes.CELL_SIZE, y * Constantes.CELL_SIZE, Constantes.CELL_SIZE, Constantes.CELL_SIZE); // damos tamaño y posicion a la etiqueta
 		label.setOpaque(true); // Hacemos que la etiqueta sea solida
-		label.setBackground((white) ? WHITE_PIECE_COLOR : BLACK_PIECE_COLOR);
+		label.setBackground((white) ? Constantes.WHITE_PIECE_COLOR : Constantes.BLACK_PIECE_COLOR);
 		return label;
 	}
 
@@ -96,24 +88,23 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 	}
 
 	public void clearAllPieces() {
-		while (board.getComponentCount() > (CELL_NUMBER * CELL_NUMBER)) {
+		while (board.getComponentCount() > (Constantes.CELL_NUMBER * Constantes.CELL_NUMBER)) {
 			board.remove(0);
 		}
-		this.repaint(); //No termino de entender porque sin esto salen bugs, pero bueno, en todos lados pone que es importante y no lo haba 
-
+		this.repaint(); 
 	}
 
 	public void generatePieces(String notation) throws BoardException  {
 		clearAllPieces();
 
-		Piece[][] tmpPieceArray = this.notationToPieceArray(notation, CELL_NUMBER);
+		Piece[][] tmpPieceArray = this.notationToPieceArray(notation, Constantes.CELL_NUMBER);
 		
 		for(Piece[] tmpX : tmpPieceArray) {
 			for(Piece tmpY : tmpX) {
 				if(tmpY!= null) {	
 					JLabel etiqueta = new JLabel();
-					etiqueta.setIcon(new ImageIcon(loadPicture(tmpY).getScaledInstance(CELL_SIZE, CELL_SIZE, CELL_SIZE)));
-					etiqueta.setBounds(tmpY.getxPosition() * CELL_SIZE, tmpY.getyPosition() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+					etiqueta.setIcon(new ImageIcon(loadPicture(tmpY).getScaledInstance(Constantes.CELL_SIZE, Constantes.CELL_SIZE, Constantes.CELL_SIZE)));
+					etiqueta.setBounds(tmpY.getxPosition() * Constantes.CELL_SIZE, tmpY.getyPosition() * Constantes.CELL_SIZE, Constantes.CELL_SIZE, Constantes.CELL_SIZE);
 					board.add(etiqueta, 0);
 				}
 			}
@@ -132,9 +123,9 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 		this.repaint(); 
 		
 		JLabel label = new JLabel(); 
-		label.setBounds(0, 0, MAX_SIZE, MAX_SIZE); 
+		label.setBounds(0, 0, Constantes.MAX_SIZE, Constantes.MAX_SIZE); 
 		label.setOpaque(true); 
-		label.setBackground((gandor.equals(Colour.WHITE)) ? WHITE_PIECE_COLOR : BLACK_PIECE_COLOR);
+		label.setBackground((gandor.equals(Colour.WHITE)) ? Constantes.WHITE_PIECE_COLOR : Constantes.BLACK_PIECE_COLOR);
 		this.add(label);
 		
 		

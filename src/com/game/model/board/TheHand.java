@@ -18,9 +18,8 @@ import com.game.model.pieces.Colour;
  * las otras dos partes
  */
 public class TheHand implements MouseInputListener {
-	//TODO: ENROQUE
-	//TODO: MEJORAR MOVIMIENTO PEON
-	//TODO: pasar todas las variables y la minima documentacion que hay a Ingles
+	
+	//TODO: pasar todas las variables y la minima documentacion que hay, a Ingles
 	//TODO: Coronar
 
 	
@@ -48,7 +47,7 @@ public class TheHand implements MouseInputListener {
 	}
 	
 	public int toCoord(int num) {
-		return (int) (num / (GraphicBoard.MAX_SIZE / (double) GraphicBoard.CELL_NUMBER));
+		return (int) (num / (Constantes.MAX_SIZE / (double) Constantes.CELL_NUMBER));
 	}
 	
 	/**
@@ -86,7 +85,7 @@ public class TheHand implements MouseInputListener {
 			// Asi calculo la distancia respecto a la pantalla del punto 00 del frame y
 			// puedo desplazarlo consecuentemente
 			graphicBoard.setLocation(e.getXOnScreen() - dragClick.getX(), e.getYOnScreen() - dragClick.getY());
-			graphicBoard.setSize(GraphicBoard.MAX_SIZE, GraphicBoard.MAX_SIZE);	
+			graphicBoard.setSize(Constantes.MAX_SIZE, Constantes.MAX_SIZE);	
 			 //Con esto añado soporte a cambio de pantallas
 			}
 	}
@@ -102,7 +101,7 @@ public class TheHand implements MouseInputListener {
 	public void mouseReleased(MouseEvent e) {
 		if (e.getButton() == 3) {
 			//Con esto soluciono un bug que al mover el juego entre diferentes pantallas cambiaba de tamaño
-			graphicBoard.setSize(GraphicBoard.MAX_SIZE, GraphicBoard.MAX_SIZE);	
+			graphicBoard.setSize(Constantes.MAX_SIZE, Constantes.MAX_SIZE);	
 			
 			
 			//Esto soluciona un bug en el que si click izq y luego click derecho, aunque soltaras el izq, podias mover el tablero con el derecho
