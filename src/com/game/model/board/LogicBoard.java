@@ -31,7 +31,7 @@ public class LogicBoard implements NotationToPieceArray{
 		
 		
 		if(x2>=0 && y2>=0 && x2<Constantes.CELL_NUMBER && y2<Constantes.CELL_NUMBER && this.board[x1][y1] != null 
-				//&& (this.board[x1][y1].getColour().equals(this.nextMove)) //Para movimiento libre simplemente comentar esto
+				&& (this.board[x1][y1].getColour().equals(this.nextMove)) //Para movimiento libre simplemente comentar esto
 				) {
 			
 			if((this.board[x2][y2] == null || !this.board[x2][y2].getColour().equals(this.board[x1][y1].getColour())) && (this.board[x1][y1].move(x2, y2, board))) {
