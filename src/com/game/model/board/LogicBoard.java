@@ -31,7 +31,7 @@ public class LogicBoard implements NotationToPieceArray{
 		
 		
 		if(x2>=0 && y2>=0 && x2<Constantes.CELL_NUMBER && y2<Constantes.CELL_NUMBER && this.board[x1][y1] != null 
-				&& (this.board[x1][y1].getColour().equals(this.nextMove)) //Para movimiento libre simplemente comentar esto
+				//&& (this.board[x1][y1].getColour().equals(this.nextMove)) //Para movimiento libre simplemente comentar esto
 				) {
 			
 			if((this.board[x2][y2] == null || !this.board[x2][y2].getColour().equals(this.board[x1][y1].getColour())) && (this.board[x1][y1].move(x2, y2, board))) {
@@ -39,7 +39,7 @@ public class LogicBoard implements NotationToPieceArray{
 			}
 			else if(this.board[x2][y2] instanceof Rook && this.board[x1][y1] instanceof King 
 					&& this.board[x1][y1].getColour().equals(this.board[x2][y2].getColour())) {
-					castling(x1, y1, x2, y2);
+				castling(x1, y1, x2, y2);
 			}		
 		}	
 		return this.obtainNotation();
@@ -52,6 +52,7 @@ public class LogicBoard implements NotationToPieceArray{
 			this.board[x2][y2] = null;
 			this.board[x1 + ((tmpX == 0)? -2 : 2)][y2] = this.board[x1][y1].clone();
 			this.board[(tmpX == 0)? 3 : 5][y1] = new Rook((tmpX == 0)? 3 : 5, y, this.board[x1][y1].getColour());
+			this.board[x1][y1] = null;
 			this.nextMove = (this.nextMove.equals(Colour.WHITE))? Colour.BLACK : Colour.WHITE; //Una vez el movimiento ser ha hecho, se cambia quien juega despues
 		}
 	}
@@ -59,7 +60,7 @@ public class LogicBoard implements NotationToPieceArray{
 	private void move(int x1, int y1, int x2, int y2) {
 
 		this.board[x2][y2] = null;
-		this.board[x2][y2] = this.board[x1][y1];
+		this.board[x2][y2] = this.board[x1][y1].clone();
 		this.board[x1][y1] = null;
 		this.nextMove = (this.nextMove.equals(Colour.WHITE))? Colour.BLACK : Colour.WHITE; //Una vez el movimiento ser ha hecho, se cambia quien juega despues
 
