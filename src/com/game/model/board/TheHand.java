@@ -19,7 +19,6 @@ import com.game.model.pieces.Colour;
  */
 public class TheHand implements MouseInputListener {
 	
-	//TODO: pasar todas las variables y la minima documentacion que hay, a Ingles
 	//TODO: Coronar
 
 	

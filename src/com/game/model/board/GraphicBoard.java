@@ -21,7 +21,7 @@ public class GraphicBoard extends JFrame implements NotationToPieceArray{
 
 
 
-	private static final String IMG_PATH = System.getProperty("user.dir") + "\\resources\\img\\";
+	private static final String IMG_PATH = System.getProperty("user.dir") + "/resources/img/";
 
 	private static JLayeredPane board = new JLayeredPane();
 
