@@ -56,7 +56,7 @@ public abstract class Piece {
 	}
 
 	public String getPieceImagePath() {
-		return this.getColour() + "\\" + this.getClass().getSimpleName().toLowerCase() + ".png";
+		return this.getColour() + "/" + this.getClass().getSimpleName().toLowerCase() + ".png";
 	}
 
 	public void setxPosition(int xPosition) {
